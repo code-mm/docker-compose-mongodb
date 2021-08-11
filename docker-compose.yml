@@ -1,0 +1,16 @@
+version: '3.2'
+services:
+    mongodb:
+        image: mongo:latest
+        container_name: "mongodb"
+        restart: always
+        environment:
+            - MONGO_DATA_DIR=/data/db
+            - MONGO_LOG_DIR=/data/logs
+            - MONGO_INITDB_ROOT_USERNAME=admin
+            - MONGO_INITDB_ROOT_PASSWORD=2021000000
+        volumes:
+            - /data/mongodb/data:/data/db
+            - /data/mongodb/logs:/data/logs
+        ports:
+            - 27017:27017
