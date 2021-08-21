@@ -1,16 +1,26 @@
 version: '3.2'
 services:
-    mongodb:
-        image: mongo:latest
-        container_name: "mongodb"
-        restart: always
-        environment:
-            - MONGO_DATA_DIR=/data/db
-            - MONGO_LOG_DIR=/data/logs
-            - MONGO_INITDB_ROOT_USERNAME=admin
-            - MONGO_INITDB_ROOT_PASSWORD=2021000000
-        volumes:
-            - /data/mongodb/data:/data/db
-            - /data/mongodb/logs:/data/logs
-        ports:
-            - 27017:27017
+  mongodb:
+      image: mongo:latest
+      container_name: "mongodb"
+      restart: always
+      environment:
+          - MONGO_DATA_DIR=/data/db
+          - MONGO_LOG_DIR=/data/logs
+          - MONGO_INITDB_ROOT_USERNAME=admin
+          - MONGO_INITDB_ROOT_PASSWORD=2021000000
+      volumes:
+          - /data/mongodb/data:/data/db
+          - /data/mongodb/logs:/data/logs
+      ports:
+          - 27017:27017
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: 202100
+      ME_CONFIG_MONGODB_URL: mongodb://root:202100@mongo:27017/
